@@ -4,7 +4,6 @@ using Avalonia.Automation;
 using Avalonia.Controls;
 using Avalonia.Layout;
 using Avalonia.Media;
-using Avalonia.Platform;
 using ShadowLink.Localization;
 
 namespace ShadowLink.Services;
@@ -25,7 +24,7 @@ internal sealed class PassphraseDialogWindow : Window
         CanMinimize = false;
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
         Background = new SolidColorBrush(Color.Parse("#0F1720"));
-        Icon = new WindowIcon(AssetLoader.Open(new Uri("avares://ShadowLink/Assets/icon.png")));
+        Icon = AppWindowIconLoader.Load();
         AutomationProperties.SetName(this, ShadowLinkText.Translate("dialog.passphrase.window"));
 
         _passphraseTextBox = new TextBox

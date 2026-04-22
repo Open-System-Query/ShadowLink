@@ -21,6 +21,7 @@ internal sealed class SimpleChoiceDialogWindow : Window
         CanMinimize = false;
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
         Background = new SolidColorBrush(Color.Parse("#0F1720"));
+        Icon = AppWindowIconLoader.Load();
         AutomationProperties.SetName(this, title);
 
         Button primaryButton = new Button

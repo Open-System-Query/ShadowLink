@@ -32,6 +32,7 @@ public partial class App : Avalonia.Application
             {
                 DataContext = _mainWindowViewModel
             };
+            mainWindow.Icon = AppWindowIconLoader.Load();
 
             desktop.MainWindow = mainWindow;
             desktop.Exit += HandleDesktopExit;

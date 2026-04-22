@@ -47,6 +47,7 @@ public sealed class RemoteDisplayWindow : Window
         MinHeight = 360;
         Background = new SolidColorBrush(Color.Parse("#0F1720"));
         ClipToBounds = true;
+        Icon = AppWindowIconLoader.Load();
         Focusable = true;
         UseLayoutRounding = true;
         AutomationProperties.SetName(this, ShadowLinkText.TranslateFormat("remote.window.automation", displayDescriptor.Name));
