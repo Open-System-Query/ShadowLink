@@ -1,0 +1,1117 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: ShadowLink UI\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.8\n"
+
+msgid "app.title"
+msgstr "ShadowLink"
+
+msgid "app.subtitle"
+msgstr "Remote device control software"
+
+msgid "app.shell.share"
+msgstr "Share your device so another one can connect."
+
+msgid "app.shell.control"
+msgstr "Choose a device to view and control."
+
+msgid "window.main.automation"
+msgstr "ShadowLink main window"
+
+msgid "common.on"
+msgstr "On"
+
+msgid "common.shortcut"
+msgstr "Shortcut"
+
+msgid "common.mode"
+msgstr "Mode"
+
+msgid "common.share"
+msgstr "Share"
+
+msgid "common.target"
+msgstr "Target"
+
+msgid "common.connect"
+msgstr "Connect"
+
+msgid "common.next"
+msgstr "Next"
+
+msgid "common.back"
+msgstr "Back"
+
+msgid "common.save"
+msgstr "Save"
+
+msgid "common.close"
+msgstr "Close"
+
+msgid "common.refresh"
+msgstr "Refresh"
+
+msgid "common.selected"
+msgstr "Selected"
+
+msgid "common.advanced"
+msgstr "Advanced"
+
+msgid "common.tools"
+msgstr "Tools"
+
+msgid "common.clipboard"
+msgstr "Clipboard"
+
+msgid "common.files"
+msgstr "Files"
+
+msgid "common.viewing"
+msgstr "Viewing"
+
+msgid "common.status"
+msgstr "Status"
+
+msgid "common.utilities"
+msgstr "Utilities"
+
+msgid "common.notes"
+msgstr "Notes"
+
+msgid "common.windows"
+msgstr "Windows"
+
+msgid "common.macos"
+msgstr "macOS"
+
+msgid "common.linux"
+msgstr "Linux"
+
+msgid "common.generic_tools"
+msgstr "Generic tools"
+
+msgid "common.device_name"
+msgstr "Device name"
+
+msgid "common.shown_to_peers"
+msgstr "Shown to peers"
+
+msgid "common.share_name"
+msgstr "Share name"
+
+msgid "common.host_name"
+msgstr "Host name"
+
+msgid "common.reachable_paths"
+msgstr "Reachable paths"
+
+msgid "common.control_port"
+msgstr "Control port"
+
+msgid "common.how_others_connect"
+msgstr "How others connect"
+
+msgid "common.sharing_support"
+msgstr "Sharing support"
+
+msgid "common.nearby_devices"
+msgstr "Nearby devices"
+
+msgid "common.scan"
+msgstr "Scan"
+
+msgid "common.direct"
+msgstr "Direct"
+
+msgid "common.settings"
+msgstr "Settings"
+
+msgid "common.shortcuts"
+msgstr "Shortcuts"
+
+msgid "common.remote_tools"
+msgstr "Remote tools"
+
+msgid "common.resolution"
+msgstr "Resolution"
+
+msgid "common.width"
+msgstr "Width"
+
+msgid "common.height"
+msgstr "Height"
+
+msgid "common.zoom_mode"
+msgstr "Zoom mode"
+
+msgid "common.actual_size"
+msgstr "Actual size"
+
+msgid "common.zoom_to_fit"
+msgstr "Zoom to fit"
+
+msgid "common.fill"
+msgstr "Fill"
+
+msgid "common.frame_rate"
+msgstr "Frame rate"
+
+msgid "common.color_mode"
+msgstr "Color mode"
+
+msgid "common.tile_size"
+msgstr "Tile size"
+
+msgid "common.dictionary"
+msgstr "Dictionary"
+
+msgid "common.patterns"
+msgstr "Patterns"
+
+msgid "common.open_settings"
+msgstr "Open settings"
+
+msgid "step.1"
+msgstr "Step 1"
+
+msgid "step.2"
+msgstr "Step 2"
+
+msgid "stage.role.title"
+msgstr "What should this machine do?"
+
+msgid "stage.role.body"
+msgstr "Pick a role to start."
+
+msgid "stage.peer.title"
+msgstr "Which machine?"
+
+msgid "stage.peer.body"
+msgstr "Scan first. Use Direct if needed."
+
+msgid "stage.advanced.title"
+msgstr "Advanced settings"
+
+msgid "stage.advanced.body"
+msgstr "Adjust how this machine views and requests remote sessions when controlling another device."
+
+msgid "stage.tools.title"
+msgstr "Clipboard and files"
+
+msgid "stage.tools.body"
+msgstr "Sync clipboard text and move files while connected."
+
+msgid "mode.share.title"
+msgstr "Share your device"
+
+msgid "mode.share.body"
+msgstr "Let another machine view and control this screen."
+
+msgid "mode.control.title"
+msgstr "Control a device"
+
+msgid "mode.control.body"
+msgstr "Use this machine as the controller."
+
+msgid "settings.remember_peers"
+msgstr "Remember peers"
+
+msgid "settings.open_advanced"
+msgstr "Open advanced settings"
+
+msgid "settings.save"
+msgstr "Save settings"
+
+msgid "advanced.viewing.body"
+msgstr "Used while this machine is viewing and controlling another device."
+
+msgid "tools.clipboard_sync_body"
+msgstr "Text clipboard sync stays active automatically while this session is connected."
+
+msgid "tools.files.body"
+msgstr "Send local files to the remote machine or ask the remote side to choose files and send them back."
+
+msgid "tools.send_files"
+msgstr "Send files"
+
+msgid "tools.request_files"
+msgstr "Request files"
+
+msgid "tools.files.sending_title"
+msgstr "Sending files"
+
+msgid "tools.files.sending_body"
+msgstr "Choose one or more local files to send to the connected machine."
+
+msgid "tools.files.requesting_title"
+msgstr "Requesting files"
+
+msgid "tools.files.requesting_body"
+msgstr "ShadowLink is asking the connected machine to choose files to send back."
+
+msgid "tools.files.ready_title"
+msgstr "File tools ready"
+
+msgid "tools.files.ready_body"
+msgstr "Use Send files to push local files or Request files to let the remote machine choose them."
+
+msgid "tools.files.requested_body"
+msgstr "The connected machine can now choose files to send back."
+
+msgid "tools.files.failed_title"
+msgstr "File transfer failed"
+
+msgid "tools.windows.start_menu"
+msgstr "Start menu"
+
+msgid "tools.windows.run"
+msgstr "Run"
+
+msgid "tools.windows.explorer"
+msgstr "File Explorer"
+
+msgid "tools.windows.settings"
+msgstr "Settings"
+
+msgid "tools.lock_screen"
+msgstr "Lock screen"
+
+msgid "tools.task_manager"
+msgstr "Task Manager"
+
+msgid "tools.on_screen_keyboard"
+msgstr "On-screen keyboard"
+
+msgid "tools.app_switcher"
+msgstr "App switcher"
+
+msgid "tools.spotlight"
+msgstr "Spotlight"
+
+msgid "tools.finder_window"
+msgstr "Finder window"
+
+msgid "tools.mission_control"
+msgstr "Mission Control"
+
+msgid "tools.force_quit"
+msgstr "Force Quit"
+
+msgid "tools.terminal"
+msgstr "Terminal"
+
+msgid "tools.linux.note"
+msgstr "Linux tool shortcuts depend on the remote desktop environment and may vary by distribution."
+
+msgid "device.transport.direct"
+msgstr "TB/USB4 direct available"
+
+msgid "device.transport.network_only"
+msgstr "Network only"
+
+msgid "device.presence"
+msgstr "Seen {0}"
+
+msgid "device.capability.ready"
+msgstr "Ready to connect"
+
+msgid "device.capability.share"
+msgstr "Share available"
+
+msgid "device.capability.no_share"
+msgstr "No share"
+
+msgid "device.capability.mouse_keyboard"
+msgstr "Mouse + keyboard"
+
+msgid "device.capability.mouse_only"
+msgstr "Mouse only"
+
+msgid "device.capability.keyboard_only"
+msgstr "Keyboard only"
+
+msgid "device.capability.no_input"
+msgstr "No input relay"
+
+msgid "shortcut.release.name"
+msgstr "Release remote control"
+
+msgid "shortcut.release.description"
+msgstr "Immediately return mouse and keyboard focus to this machine."
+
+msgid "shortcut.cursor_lock.name"
+msgstr "Toggle cursor lock"
+
+msgid "shortcut.cursor_lock.description"
+msgstr "Temporarily unlock the cursor so you can leave the remote display edge."
+
+msgid "shortcut.quick_switch.name"
+msgstr "Quick switch send/receive"
+
+msgid "shortcut.quick_switch.description"
+msgstr "Swap between sharing this machine and receiving the remote stream."
+
+msgid "stream.color.32"
+msgstr "32-bit color"
+
+msgid "stream.color.24"
+msgstr "24-bit color"
+
+msgid "stream.color.16"
+msgstr "16-bit color"
+
+msgid "stream.color.8"
+msgstr "8-bit color"
+
+msgid "stream.color.4"
+msgstr "4-bit color"
+
+msgid "stream.scale.fill"
+msgstr "fill and crop"
+
+msgid "stream.scale.zoom_to_fit"
+msgstr "zoom to fit"
+
+msgid "stream.scale.actual_size"
+msgstr "actual size"
+
+msgid "stream.dictionary.gb"
+msgstr "{0} GB"
+
+msgid "stream.dictionary.mb"
+msgstr "{0} MB"
+
+msgid "network.checking_addresses"
+msgstr "Checking reachable addresses..."
+
+msgid "network.no_reachable_address"
+msgstr "No reachable network address detected yet"
+
+msgid "status.preparing_workspace"
+msgstr "Preparing workspace"
+
+msgid "status.loading_profile"
+msgstr "Loading profile and network listeners."
+
+msgid "status.offline"
+msgstr "Offline"
+
+msgid "status.no_active_peer"
+msgstr "No active peer"
+
+msgid "status.choose_peer"
+msgstr "Choose a peer to begin."
+
+msgid "status.auto"
+msgstr "Auto"
+
+msgid "status.preparing_to_share"
+msgstr "Preparing to share"
+
+msgid "status.waiting_for_machine"
+msgstr "Waiting for another machine"
+
+msgid "status.waiting_for_network"
+msgstr "Waiting for network"
+
+msgid "status.escape_summary_empty"
+msgstr "Set an escape shortcut."
+
+msgid "status.share_listener_checking"
+msgstr "ShadowLink is starting the share listener and checking reachable network paths."
+
+msgid "status.share_preparing_discovery_ready"
+msgstr "ShadowLink is preparing nearby discovery on {0}:{1}. Direct address connections can already use this machine."
+
+msgid "status.share_preparing_discovery_no_network"
+msgstr "ShadowLink is preparing nearby discovery, but no usable network address is available yet."
+
+msgid "status.share_ready"
+msgstr "ShadowLink is ready on {0}:{1}."
+
+msgid "status.share_waiting_link"
+msgstr "ShadowLink is listening on port {0}, but the TB/USB4 direct interface is not linked yet."
+
+msgid "status.share_waiting_direct_address"
+msgstr "ShadowLink is listening on port {0}, but the direct link does not have a usable network address yet."
+
+msgid "status.share_waiting_network"
+msgstr "ShadowLink is listening on port {0}, but no usable network address is available yet. Connect Wi-Fi, Ethernet, or a TB/USB4 direct link."
+
+msgid "status.share_warning_prefix"
+msgstr " Sharing is available, but {0}"
+
+msgid "status.discovery_slow"
+msgstr "Nearby discovery is taking too long to start. Sharing is already available."
+
+msgid "status.discovery_failed"
+msgstr "Nearby discovery could not start: {0}"
+
+msgid "activity.discovery"
+msgstr "Discovery"
+
+msgid "activity.files"
+msgstr "Files"
+
+msgid "remote.window.title"
+msgstr "ShadowLink - {0}"
+
+msgid "remote.window.automation"
+msgstr "Remote display window for {0}"
+
+msgid "remote.image.automation"
+msgstr "Remote display {0}"
+
+msgid "remote.tool.start_menu"
+msgstr "Opened the Start menu on the remote device."
+
+msgid "remote.tool.run"
+msgstr "Opened Run on the remote device."
+
+msgid "remote.tool.explorer"
+msgstr "Opened File Explorer on the remote device."
+
+msgid "remote.tool.settings"
+msgstr "Opened Settings on the remote device."
+
+msgid "remote.tool.task_manager"
+msgstr "Opened Task Manager on the remote device."
+
+msgid "remote.tool.keyboard"
+msgstr "Opened the on-screen keyboard on the remote device."
+
+msgid "remote.tool.spotlight"
+msgstr "Opened Spotlight on the remote device."
+
+msgid "remote.tool.finder"
+msgstr "Opened Finder on the remote device."
+
+msgid "remote.tool.mission_control"
+msgstr "Opened Mission Control on the remote device."
+
+msgid "remote.tool.force_quit"
+msgstr "Opened Force Quit Applications on the remote device."
+
+msgid "remote.tool.terminal"
+msgstr "Opened a terminal on the remote device."
+
+msgid "common.session"
+msgstr "Session"
+
+msgid "common.security"
+msgstr "Security"
+
+msgid "common.quality"
+msgstr "Quality"
+
+msgid "common.state"
+msgstr "State"
+
+msgid "common.stop_sharing"
+msgstr "Stop sharing"
+
+msgid "common.cancel"
+msgstr "Cancel"
+
+msgid "common.disconnect"
+msgstr "Disconnect"
+
+msgid "common.network"
+msgstr "Network"
+
+msgid "common.policy"
+msgstr "Policy"
+
+msgid "common.discovery"
+msgstr "Discovery"
+
+msgid "common.control"
+msgstr "Control"
+
+msgid "common.passphrase"
+msgstr "Passphrase"
+
+msgid "common.built_by"
+msgstr "Built by"
+
+msgid "common.direct_address"
+msgstr "Direct address"
+
+msgid "common.name"
+msgstr "Name"
+
+msgid "common.address"
+msgstr "Address"
+
+msgid "common.port"
+msgstr "Port"
+
+msgid "common.optional"
+msgstr "Optional"
+
+msgid "common.masked_input"
+msgstr "Masked secure text input"
+
+msgid "common.native"
+msgstr "Native"
+
+msgid "common.failed"
+msgstr "failed"
+
+msgid "stage.settings.title"
+msgstr "Settings"
+
+msgid "stage.settings.body"
+msgstr "Adjust network, access, and shortcut behavior."
+
+msgid "settings.discovery_port"
+msgstr "Discovery port"
+
+msgid "settings.control_port"
+msgstr "Control port"
+
+msgid "settings.session_passphrase"
+msgstr "Session passphrase"
+
+msgid "settings.remote_keyboard"
+msgstr "Remote keyboard"
+
+msgid "settings.remote_mouse"
+msgstr "Remote mouse"
+
+msgid "settings.auto_scan"
+msgstr "Auto scan on open"
+
+msgid "advanced.resolution.native"
+msgstr "Use native resolution"
+
+msgid "advanced.resolution.1080p"
+msgstr "Use 1080p resolution"
+
+msgid "advanced.resolution.720p"
+msgstr "Use 720p resolution"
+
+msgid "advanced.resolution.1366x768"
+msgstr "Use 1366 by 768 resolution"
+
+msgid "advanced.resolution.800x600"
+msgstr "Use 800 by 600 resolution"
+
+msgid "advanced.frame_rate"
+msgstr "Stream frame rate"
+
+msgid "advanced.color.32"
+msgstr "Use 32 bit color mode"
+
+msgid "advanced.color.24"
+msgstr "Use 24 bit color mode"
+
+msgid "advanced.color.16"
+msgstr "Use 16 bit color mode"
+
+msgid "advanced.color.8"
+msgstr "Use 8 bit color mode"
+
+msgid "advanced.color.4"
+msgstr "Use 4 bit color mode"
+
+msgid "advanced.tile.8"
+msgstr "Use 8 pixel tile size"
+
+msgid "advanced.tile.16"
+msgstr "Use 16 pixel tile size"
+
+msgid "advanced.tile.32"
+msgstr "Use 32 pixel tile size"
+
+msgid "advanced.tile_size"
+msgstr "Stream tile size"
+
+msgid "advanced.dictionary.512"
+msgstr "Use 512 megabyte dictionary"
+
+msgid "advanced.dictionary.1024"
+msgstr "Use 1 gigabyte dictionary"
+
+msgid "advanced.dictionary.2048"
+msgstr "Use 2 gigabyte dictionary"
+
+msgid "advanced.dictionary.4096"
+msgstr "Use 4 gigabyte dictionary"
+
+msgid "advanced.dictionary.8192"
+msgstr "Use 8 gigabyte dictionary"
+
+msgid "advanced.dictionary.16384"
+msgstr "Use 16 gigabyte dictionary"
+
+msgid "advanced.dictionary_size"
+msgstr "Stream dictionary size"
+
+msgid "advanced.patterns.slider"
+msgstr "Patterns share percent slider"
+
+msgid "advanced.patterns.slider_help"
+msgstr "Adjust how much of the total stream memory budget is reserved for pattern matching."
+
+msgid "peer.scan.automation"
+msgstr "Scan for nearby devices"
+
+msgid "peer.direct.automation"
+msgstr "Use direct address"
+
+msgid "peer.refresh.automation"
+msgstr "Refresh nearby devices"
+
+msgid "peer.target_name"
+msgstr "Target name"
+
+msgid "peer.target_port"
+msgstr "Target port"
+
+msgid "peer.address.placeholder"
+msgstr "IP address or hostname"
+
+msgid "peer.summary.direct"
+msgstr "{0} via direct address {1}:{2}"
+
+msgid "peer.summary.none"
+msgstr "No target selected yet."
+
+msgid "peer.summary.discovery"
+msgstr "{0} at {1}"
+
+msgid "transport.network"
+msgstr "Network"
+
+msgid "transport.tb_usb4"
+msgstr "TB/USB4 direct"
+
+msgid "transport.usb_network"
+msgstr "USB network"
+
+msgid "transport.summary.speed"
+msgstr "{0} ({1} Mbps {2})"
+
+msgid "transport.summary.interface"
+msgstr "{0} ({1})"
+
+msgid "status.ready"
+msgstr "Ready"
+
+msgid "status.ready_for_connections"
+msgstr "Ready for connections"
+
+msgid "status.choose_role"
+msgstr "Choose a role, then scan or enter a direct address to start."
+
+msgid "status.choose_or_wait"
+msgstr "Choose a peer or wait for an inbound request."
+
+msgid "status.select_device"
+msgstr "Select a device to start a session."
+
+msgid "status.scanning_peers"
+msgstr "Scanning for peers on available network links."
+
+msgid "status.accepting_incoming"
+msgstr "This machine can accept incoming ShadowLink sessions."
+
+msgid "status.sharing_stopped"
+msgstr "Sharing stopped. This machine is no longer listening for inbound ShadowLink sessions."
+
+msgid "status.start_sharing_again"
+msgstr "Start sharing again when you are ready."
+
+msgid "status.passphrase_required"
+msgstr "Passphrase required"
+
+msgid "status.passphrase_required_short"
+msgstr "Passphrase required."
+
+msgid "status.enter_remote_passphrase"
+msgstr "Enter the remote passphrase and try again."
+
+msgid "status.connection_refused"
+msgstr "Connection refused"
+
+msgid "status.peer_rejected"
+msgstr "The peer did not accept the session request."
+
+msgid "status.sharing_unavailable"
+msgstr "Sharing unavailable"
+
+msgid "status.sharing_this_machine"
+msgstr "Sharing this machine"
+
+msgid "status.ready_to_control"
+msgstr "Ready to control"
+
+msgid "status.session_ended_listening"
+msgstr "The session ended. ShadowLink is still listening for the next connection."
+
+msgid "status.session_ended_ready"
+msgstr "The session ended. Start another session whenever you are ready."
+
+msgid "status.waiting_next_connection"
+msgstr "ShadowLink is waiting for the next connection."
+
+msgid "status.idle"
+msgstr "ShadowLink is idle."
+
+msgid "status.connect_again"
+msgstr "The session ended. Connect again whenever you are ready."
+
+msgid "status.receiving_remote_screen"
+msgstr "Receiving remote screen"
+
+msgid "activity.transport"
+msgstr "Transport"
+
+msgid "activity.session"
+msgstr "Session"
+
+msgid "activity.streaming"
+msgstr "Streaming"
+
+msgid "activity.security"
+msgstr "Security"
+
+msgid "session.listener.port"
+msgstr "Listening on port {0}"
+
+msgid "session.activity.listening"
+msgstr "Listening for incoming ShadowLink sessions on port {0}."
+
+msgid "session.activity.stopped_sharing"
+msgstr "Stopped sharing and closed the local listener."
+
+msgid "session.activity.connected"
+msgstr "Connected to {0} at {1}."
+
+msgid "session.activity.closed"
+msgstr "Active session closed."
+
+msgid "session.activity.returned_ready"
+msgstr "Returned to the ready state."
+
+msgid "session.activity.closed_windows"
+msgstr "Closed the remote display windows."
+
+msgid "session.activity.inbound_dropped"
+msgstr "Dropped an inbound connection before the handshake completed: {0}"
+
+msgid "session.activity.inbound_prepare_failed"
+msgstr "Dropped an inbound connection because the host could not prepare the session: {0}"
+
+msgid "session.activity.passphrase_rejected"
+msgstr "Rejected inbound request from {0} because the passphrase did not match."
+
+msgid "session.activity.accepted_inbound"
+msgstr "Accepted inbound request from {0} at {1}."
+
+msgid "session.activity.prepare_timeout"
+msgstr "Timed out while preparing an inbound session for {0}."
+
+msgid "session.activity.rejected_inbound"
+msgstr "Rejected inbound request from {0}: {1}"
+
+msgid "session.activity.connection_ended"
+msgstr "Connection to {0} ended."
+
+msgid "session.handshake.remote_can_control"
+msgstr "The remote machine can now view and control this machine."
+
+msgid "session.handshake.remote_ready_to_send"
+msgstr "The remote machine is ready to send live displays to this console."
+
+msgid "session.error.peer_rejected"
+msgstr "Peer rejected the request."
+
+msgid "session.error.handshake_closed"
+msgstr "Connected to {0}, but the remote machine closed the session before completing the handshake. Make sure ShadowLink is open and ready on the other machine."
+
+msgid "session.error.handshake_incomplete"
+msgstr "Connected to {0}, but the remote machine did not finish the ShadowLink handshake. Make sure the remote app is open, not restarting, and allowed through the firewall."
+
+msgid "session.error.prepare_timeout"
+msgstr "ShadowLink did not finish preparing the remote session in time."
+
+msgid "session.error.prepare_failed"
+msgstr "ShadowLink could not prepare sharing on the remote machine. {0}"
+
+msgid "session.error.no_endpoint_resolved"
+msgstr "No reachable IPv4 or IPv6 endpoint was resolved for the selected machine."
+
+msgid "session.error.tried_endpoints"
+msgstr "Tried {0}."
+
+msgid "session.error.could_not_reach"
+msgstr "Could not reach {0} on port {1}. {2} Verify both machines are on the same network and allow incoming ShadowLink traffic."
+
+msgid "session.error.direct_mode_no_endpoint"
+msgstr "Thunderbolt/USB4 direct mode was requested, but {0} did not advertise any direct-link endpoints."
+
+msgid "session.error.direct_mode_no_tb"
+msgstr "Thunderbolt/USB4 direct mode was requested, but {0} did not advertise a Thunderbolt/USB4 direct network endpoint."
+
+msgid "files.pick_send_title"
+msgstr "Choose files to send"
+
+msgid "files.pick_request_title"
+msgstr "Choose files to send back"
+
+msgid "files.requested_remote_selection"
+msgstr "Asked the connected machine to choose files to send back."
+
+msgid "files.selection_none"
+msgstr "No files were chosen for transfer."
+
+msgid "files.sent"
+msgstr "Sent {0}."
+
+msgid "files.received"
+msgstr "Received {0}."
+
+msgid "files.saved_to"
+msgstr "Saved the incoming file to {0}."
+
+msgid "files.transfer_failed"
+msgstr "File transfer failed: {0}"
+
+msgid "files.transfer_cancelled"
+msgstr "File transfer cancelled."
+
+msgid "streaming.no_displays"
+msgstr "The remote machine did not expose any displays."
+
+msgid "streaming.opened_windows"
+msgstr "Opened {0} remote display window(s)."
+
+msgid "streaming.capture_failed"
+msgstr "Local display capture could not start: {0}"
+
+msgid "streaming.capture_unavailable"
+msgstr "Local display capture is not available on this machine."
+
+msgid "streaming.no_local_displays"
+msgstr "No local displays were detected for desktop sharing."
+
+msgid "streaming.prepare_failed"
+msgstr "Desktop sharing could not be prepared on the remote machine. {0}"
+
+msgid "firewall.review_needed"
+msgstr "Firewall access needs manual review"
+
+msgid "firewall.open"
+msgstr "Network access is open"
+
+msgid "firewall.allow_incoming"
+msgstr "Allow incoming ShadowLink traffic"
+
+msgid "firewall.allow_access"
+msgstr "Allow access"
+
+msgid "firewall.not_changed"
+msgstr "Firewall access was not changed"
+
+msgid "firewall.configure.automation"
+msgstr "Configure firewall access"
+
+msgid "firewall.windows.path_missing"
+msgstr "ShadowLink could not resolve the running application path needed to allow this app through Windows Defender Firewall."
+
+msgid "firewall.windows.ready"
+msgstr "Windows Defender Firewall already allows ShadowLink to receive incoming connections."
+
+msgid "firewall.windows.allow_detail"
+msgstr "Allow ShadowLink through Windows Defender Firewall so other machines can connect without disabling the firewall."
+
+msgid "firewall.windows.not_changed"
+msgstr "ShadowLink still needs to be allowed through Windows Defender Firewall. Approve the elevation prompt or allow the app manually."
+
+msgid "firewall.macos.path_missing"
+msgstr "ShadowLink could not resolve the running application path needed for macOS Application Firewall checks."
+
+msgid "firewall.macos.disabled"
+msgstr "macOS Application Firewall is disabled, so ShadowLink can accept incoming connections."
+
+msgid "firewall.macos.ready"
+msgstr "macOS Application Firewall already allows ShadowLink to receive incoming connections."
+
+msgid "firewall.macos.allow_title"
+msgstr "Allow ShadowLink in macOS firewall"
+
+msgid "firewall.macos.allow_detail"
+msgstr "Add this app to macOS Application Firewall and allow incoming connections so peers can reach TCP {0}."
+
+msgid "firewall.linux.ufw_inactive"
+msgstr "UFW is inactive, so ShadowLink can accept incoming connections."
+
+msgid "firewall.linux.ufw_ready"
+msgstr "UFW already allows UDP {0} and TCP {1} for ShadowLink."
+
+msgid "firewall.linux.ufw_allow"
+msgstr "Add Linux firewall rules for UDP {0} and TCP {1} so peers can connect."
+
+msgid "firewall.linux.firewalld_ready"
+msgstr "firewalld already allows UDP {0} and TCP {1} for ShadowLink."
+
+msgid "firewall.linux.firewalld_allow"
+msgstr "Open UDP {0} and TCP {1} in firewalld so peers can connect."
+
+msgid "firewall.linux.manual"
+msgstr "ShadowLink could not find a supported Linux firewall tool. Open UDP {0} and TCP {1} manually if the host firewall is enabled."
+
+msgid "dialog.passphrase.window"
+msgstr "ShadowLink passphrase required dialog"
+
+msgid "dialog.passphrase.title"
+msgstr "Passphrase required"
+
+msgid "dialog.passphrase.placeholder"
+msgstr "Enter passphrase"
+
+msgid "dialog.passphrase.connect"
+msgstr "Connect with passphrase"
+
+msgid "dialog.passphrase.cancel"
+msgstr "Cancel passphrase prompt"
+
+msgid "launch.cancel.automation"
+msgstr "Cancel connection attempt"
+
+msgid "share_support.windows"
+msgstr "Windows desktop capture and input relay are available."
+
+msgid "share_support.macos.ready"
+msgstr "macOS desktop capture and input relay are available."
+
+msgid "share_support.macos.accessibility_needed"
+msgstr "macOS Screen Recording is granted, but Accessibility access is still required for mouse and keyboard relay."
+
+msgid "share_support.macos.screen_recording_needed"
+msgstr "macOS Accessibility access is granted, but Screen Recording permission is still required for desktop capture."
+
+msgid "share_support.macos.permissions_needed"
+msgstr "macOS requires both Screen Recording and Accessibility permissions before this machine can be fully shared and controlled."
+
+msgid "share_support.linux.x11"
+msgstr "Linux desktop capture and input relay are available on X11."
+
+msgid "share_support.linux.wayland"
+msgstr "This Linux session is running on Wayland, but the current capture backend supports X11 only."
+
+msgid "share_support.linux.no_x11"
+msgstr "No X11 desktop session was detected for Linux screen capture."
+
+msgid "share_support.unknown"
+msgstr "Desktop sharing is not implemented for this platform."
+
+msgid "common.start_sharing"
+msgstr "Start sharing"
+
+msgid "step.3"
+msgstr "Step 3"
+
+msgid "wizard.step_of"
+msgstr "Step {0} of {1}"
+
+msgid "wizard.role.title"
+msgstr "Choose this machine's role"
+
+msgid "wizard.peer.title"
+msgstr "Choose the target machine"
+
+msgid "wizard.launch.title"
+msgstr "Review and start"
+
+msgid "wizard.role.summary"
+msgstr "Choose this machine's role."
+
+msgid "wizard.peer.summary"
+msgstr "Choose the target machine."
+
+msgid "wizard.launch.share_summary"
+msgstr "Start sharing and wait for the other machine to connect."
+
+msgid "wizard.launch.connect_summary"
+msgstr "Review and connect."
+
+msgid "wizard.settings.summary"
+msgstr "Adjust the main network, access, and shortcut settings."
+
+msgid "wizard.advanced.summary"
+msgstr "Adjust viewing and protocol tuning only if needed."
+
+msgid "wizard.tools.summary"
+msgstr "Open remote tools while connected."
+
+msgid "wizard.next.review_share"
+msgstr "Next: Review Share"
+
+msgid "wizard.next.choose_peer"
+msgstr "Next: Choose Peer"
+
+msgid "wizard.next.review_session"
+msgstr "Next: Review Session"
+
+msgid "devices.count.none"
+msgstr "No devices discovered"
+
+msgid "devices.count.one"
+msgstr "1 device discovered"
+
+msgid "devices.count.many"
+msgstr "{0} devices discovered"
+
+msgid "role.summary.share"
+msgstr "This machine will be shared."
+
+msgid "role.summary.control"
+msgstr "This machine will control the remote device."
+
+msgid "share.security.open"
+msgstr "Open access"
+
+msgid "share.security.passphrase_required"
+msgstr "Passphrase required"
+
+msgid "passphrase.prompt.detail"
+msgstr "The selected machine requires a passphrase. Enter it here and connect again."
+
+msgid "transport.summary.automatic"
+msgstr "ShadowLink automatically chooses the best available route and prefers a ready Thunderbolt/USB4 direct link when one is available."
+
+msgid "launch.preparing_share_with_settings"
+msgstr "Applying the current share settings and starting the share listener."
+
+msgid "launch.preparing_share"
+msgstr "Starting the share listener."
+
+msgid "launch.refresh_listener_with_settings"
+msgstr "Applying the current settings and refreshing the local listener."
+
+msgid "launch.refresh_listener"
+msgstr "Refreshing the local listener."
+
+msgid "launch.apply_connection_settings"
+msgstr "Applying the current connection settings."
+
+msgid "launch.check_connection_state"
+msgstr "Checking the local connection state."
+
+msgid "discovery.progress.title"
+msgstr "Searching for devices"
+
+msgid "discovery.progress.detail"
+msgstr "Scanning all reachable network paths for nearby ShadowLink machines and preferring a ready Thunderbolt/USB4 direct link when one is available."

@@ -1,0 +1,15 @@
+<Application
+    x:Class="ShadowLink.App"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:fluent="clr-namespace:Avalonia.Themes.Fluent;assembly=Avalonia.Themes.Fluent">
+  <Application.Styles>
+    <FluentTheme DensityStyle="Normal">
+      <FluentTheme.Palettes>
+        <fluent:ColorPaletteResources x:Key="Light" Accent="#009CD2" />
+        <fluent:ColorPaletteResources x:Key="Dark" Accent="#009CD2" />
+      </FluentTheme.Palettes>
+    </FluentTheme>
+    <StyleInclude Source="avares://ShadowLink/Styles/Theme.axaml" />
+  </Application.Styles>
+</Application>

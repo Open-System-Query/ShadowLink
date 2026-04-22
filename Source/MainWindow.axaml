@@ -1,0 +1,769 @@
+<Window
+    x:Class="ShadowLink.MainWindow"
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:automation="clr-namespace:Avalonia.Automation;assembly=Avalonia.Controls"
+    xmlns:controls="using:ShadowLink.Controls"
+    xmlns:core="using:ShadowLink.Core.Models"
+    xmlns:i="https://github.com/projektanker/icons.avalonia"
+    xmlns:loc="using:ShadowLink.Localization"
+    xmlns:vm="using:ShadowLink.Application.ViewModels"
+    x:DataType="vm:MainWindowViewModel"
+    Width="1180"
+    Height="760"
+    MinWidth="1024"
+    MinHeight="680"
+    CanResize="True"
+    CanMaximize="False"
+    Icon="avares://ShadowLink/Assets/icon.png"
+    WindowStartupLocation="CenterScreen"
+    automation:AutomationProperties.Name="{loc:Tr Key=window.main.automation}"
+    Title="{Binding AppTitle}">
+  <Window.DataTemplates>
+    <DataTemplate DataType="vm:DeviceCardViewModel">
+      <Border Classes="device-card" automation:AutomationProperties.HelpText="{Binding Address}" automation:AutomationProperties.Name="{Binding DisplayName}">
+        <StackPanel Spacing="8">
+          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+            <StackPanel Spacing="2">
+              <TextBlock Classes="card-title" Text="{Binding DisplayName}" />
+              <TextBlock Classes="muted" Text="{Binding Address}" TextWrapping="Wrap" />
+            </StackPanel>
+            <Border Classes="status-pill" VerticalAlignment="Top">
+              <TextBlock Classes="status-pill-text" Text="{Binding PresenceLabel}" />
+            </Border>
+          </Grid>
+          <WrapPanel Orientation="Horizontal">
+            <Border Classes="tag-pill" Margin="0,0,8,8">
+              <TextBlock Classes="tag-text" Text="{Binding PlatformLabel}" />
+            </Border>
+            <Border Classes="tag-pill" Margin="0,0,8,8">
+              <TextBlock Classes="tag-text" Text="{Binding TransportLabel}" />
+            </Border>
+            <Border Classes="tag-pill" Margin="0,0,8,8">
+              <TextBlock Classes="tag-text" Text="{Binding CapabilitiesLabel}" />
+            </Border>
+          </WrapPanel>
+        </StackPanel>
+      </Border>
+    </DataTemplate>
+
+    <DataTemplate DataType="vm:ShortcutBindingViewModel">
+      <Border Classes="option-row">
+        <StackPanel Spacing="10">
+          <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+            <StackPanel Spacing="2">
+              <TextBlock Classes="card-title" Text="{Binding Name}" />
+              <TextBlock Classes="muted" Text="{Binding Description}" TextWrapping="Wrap" />
+            </StackPanel>
+            <CheckBox Content="{loc:Tr Key=common.on}" Grid.Column="1" IsChecked="{Binding IsEnabled}" TabIndex="750" VerticalAlignment="Top" automation:AutomationProperties.HelpText="{Binding Description}" automation:AutomationProperties.Name="{Binding Name}" />
+          </Grid>
+          <TextBox PlaceholderText="{loc:Tr Key=common.shortcut}" TabIndex="760" Text="{Binding Gesture}" automation:AutomationProperties.HelpText="{Binding Description}" automation:AutomationProperties.Name="{Binding Name}" />
+        </StackPanel>
+      </Border>
+    </DataTemplate>
+
+    <DataTemplate DataType="core:ActivityEntry">
+      <Border Classes="option-row">
+        <Grid ColumnDefinitions="76,*" ColumnSpacing="12">
+          <TextBlock Classes="field-label" Text="{Binding TimestampLabel}" />
+          <StackPanel Grid.Column="1" Spacing="2">
+            <TextBlock Classes="card-title" Text="{Binding CategoryLabel}" />
+            <TextBlock Classes="muted" Text="{Binding MessageLabel}" TextWrapping="Wrap" />
+          </StackPanel>
+        </Grid>
+      </Border>
+    </DataTemplate>
+  </Window.DataTemplates>
+
+  <Grid Margin="24" RowDefinitions="Auto,Auto,*,Auto">
+    <Border Classes="top-shell">
+      <StackPanel Spacing="8">
+        <Image Classes="app-logo" HorizontalAlignment="Left" Source="avares://ShadowLink/Assets/banner.png" />
+        <StackPanel Spacing="4">
+          <TextBlock Classes="app-subtitle" Focusable="True" IsTabStop="True" TabIndex="1" Text="{Binding AppSubtitle}" automation:AutomationProperties.Name="{Binding AppSubtitle}" />
+          <TextBlock Classes="shell-caption" Focusable="True" IsTabStop="True" TabIndex="2" Text="{Binding ShellCaption}" automation:AutomationProperties.Name="{Binding ShellCaption}" />
+        </StackPanel>
+      </StackPanel>
+    </Border>
+
+    <Grid Grid.Row="1" Margin="0,18,0,18">
+      <Grid ColumnDefinitions="Auto,Auto,Auto" ColumnSpacing="0" IsVisible="{Binding IsShareFlowVisible}">
+        <Button Classes="step-node" Classes.selected="{Binding IsRoleStepSelected}" Command="{Binding GoToRoleStepCommand}" TabIndex="10" automation:AutomationProperties.Name="{loc:Tr Key=common.mode}">
+          <StackPanel Orientation="Horizontal" Spacing="10">
+            <Image Height="18" Width="18">
+              <Image.Source>
+                <i:IconImage Brush="{StaticResource AccentBrush}" Value="fa-solid fa-desktop" />
+              </Image.Source>
+            </Image>
+            <StackPanel Spacing="1">
+              <TextBlock Classes="step-number" Text="01" />
+              <TextBlock Classes="step-title" Text="{loc:Tr Key=common.mode}" />
+            </StackPanel>
+          </StackPanel>
+        </Button>
+        <Border Classes="step-link" Grid.Column="1" />
+        <Button Classes="step-node" Classes.selected="{Binding IsLaunchStepSelected}" Command="{Binding GoToLaunchStepCommand}" Grid.Column="2" TabIndex="20" automation:AutomationProperties.Name="{loc:Tr Key=common.share}">
+          <StackPanel Orientation="Horizontal" Spacing="10">
+            <Image Height="18" Width="18">
+              <Image.Source>
+                <i:IconImage Brush="{StaticResource AccentBrush}" Value="fa-solid fa-share-nodes" />
+              </Image.Source>
+            </Image>
+            <StackPanel Spacing="1">
+              <TextBlock Classes="step-number" Text="02" />
+              <TextBlock Classes="step-title" Text="{loc:Tr Key=common.share}" />
+            </StackPanel>
+          </StackPanel>
+        </Button>
+      </Grid>
+
+      <Grid ColumnDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnSpacing="0" IsVisible="{Binding IsControlFlowVisible}">
+        <Button Classes="step-node" Classes.selected="{Binding IsRoleStepSelected}" Command="{Binding GoToRoleStepCommand}" TabIndex="10" automation:AutomationProperties.Name="{loc:Tr Key=common.mode}">
+          <StackPanel Orientation="Horizontal" Spacing="10">
+            <Image Height="18" Width="18">
+              <Image.Source>
+                <i:IconImage Brush="{StaticResource AccentBrush}" Value="fa-solid fa-desktop" />
+              </Image.Source>
+            </Image>
+            <StackPanel Spacing="1">
+              <TextBlock Classes="step-number" Text="01" />
+              <TextBlock Classes="step-title" Text="{loc:Tr Key=common.mode}" />
+            </StackPanel>
+          </StackPanel>
+        </Button>
+        <Border Classes="step-link" Grid.Column="1" />
+        <Button Classes="step-node" Classes.selected="{Binding IsPeerStepSelected}" Command="{Binding GoToPeerStepCommand}" Grid.Column="2" TabIndex="20" automation:AutomationProperties.Name="{loc:Tr Key=common.target}">
+          <StackPanel Orientation="Horizontal" Spacing="10">
+            <Image Height="18" Width="18">
+              <Image.Source>
+                <i:IconImage Brush="{StaticResource AccentBrush}" Value="fa-solid fa-magnifying-glass" />
+              </Image.Source>
+            </Image>
+            <StackPanel Spacing="1">
+              <TextBlock Classes="step-number" Text="02" />
+              <TextBlock Classes="step-title" Text="{loc:Tr Key=common.target}" />
+            </StackPanel>
+          </StackPanel>
+        </Button>
+        <Border Classes="step-link" Grid.Column="3" />
+        <Button Classes="step-node" Classes.selected="{Binding IsLaunchStepSelected}" Command="{Binding GoToLaunchStepCommand}" Grid.Column="4" TabIndex="30" automation:AutomationProperties.Name="{loc:Tr Key=common.connect}">
+          <StackPanel Orientation="Horizontal" Spacing="10">
+            <Image Height="18" Width="18">
+              <Image.Source>
+                <i:IconImage Brush="{StaticResource AccentBrush}" Value="fa-solid fa-bolt" />
+              </Image.Source>
+            </Image>
+            <StackPanel Spacing="1">
+              <TextBlock Classes="step-number" Text="03" />
+              <TextBlock Classes="step-title" Text="{loc:Tr Key=common.connect}" />
+            </StackPanel>
+          </StackPanel>
+        </Button>
+      </Grid>
+    </Grid>
+
+    <Grid Grid.Row="2">
+      <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+        <StackPanel Spacing="18" Margin="0,0,0,18">
+      <Border Classes="stage-card" IsVisible="{Binding IsRoleStepVisible}">
+        <StackPanel Spacing="22">
+          <StackPanel Spacing="6">
+            <TextBlock Classes="stage-eyebrow" Focusable="True" IsTabStop="True" TabIndex="90" Text="{loc:Tr Key=step.1}" automation:AutomationProperties.Name="{loc:Tr Key=step.1}" />
+            <TextBlock Classes="stage-title" Focusable="True" IsTabStop="True" TabIndex="91" Text="{loc:Tr Key=stage.role.title}" automation:AutomationProperties.Name="{loc:Tr Key=stage.role.title}" />
+            <TextBlock Classes="stage-body" Focusable="True" IsTabStop="True" TabIndex="92" Text="{loc:Tr Key=stage.role.body}" automation:AutomationProperties.Name="{loc:Tr Key=stage.role.body}" />
+          </StackPanel>
+
+          <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
+            <Button Classes="mode-card" Classes.selected="{Binding IsSendModeSelected}" Command="{Binding PrepareSendCommand}" TabIndex="100" automation:AutomationProperties.Name="{loc:Tr Key=mode.share.title}">
+              <StackPanel Spacing="16">
+                <Image Height="28" Width="28">
+                  <Image.Source>
+                    <i:IconImage Brush="{StaticResource AccentBrush}" Value="fa-solid fa-desktop" />
+                  </Image.Source>
+                </Image>
+                <StackPanel Spacing="4">
+                  <TextBlock Classes="card-title" Text="{loc:Tr Key=mode.share.title}" />
+                  <TextBlock Classes="muted" Text="{loc:Tr Key=mode.share.body}" TextWrapping="Wrap" />
+                </StackPanel>
+                <TextBlock Classes="selection-indicator" IsVisible="{Binding IsSendModeSelected}" Text="{loc:Tr Key=common.selected}" />
+              </StackPanel>
+            </Button>
+
+            <Button Classes="mode-card" Classes.selected="{Binding IsReceiveModeSelected}" Command="{Binding PrepareReceiveCommand}" Grid.Column="1" TabIndex="110" automation:AutomationProperties.Name="{loc:Tr Key=mode.control.title}">
+              <StackPanel Spacing="16">
+                <Image Height="28" Width="28">
+                  <Image.Source>
+                    <i:IconImage Brush="{StaticResource AccentBrush}" Value="fa-solid fa-keyboard" />
+                  </Image.Source>
+                </Image>
+                <StackPanel Spacing="4">
+                  <TextBlock Classes="card-title" Text="{loc:Tr Key=mode.control.title}" />
+                  <TextBlock Classes="muted" Text="{loc:Tr Key=mode.control.body}" TextWrapping="Wrap" />
+                </StackPanel>
+                <TextBlock Classes="selection-indicator" IsVisible="{Binding IsReceiveModeSelected}" Text="{loc:Tr Key=common.selected}" />
+              </StackPanel>
+            </Button>
+          </Grid>
+
+          <Grid ColumnDefinitions="170,*" ColumnSpacing="12">
+            <TextBlock Classes="field-label" VerticalAlignment="Center" Text="{loc:Tr Key=common.device_name}" />
+            <TextBox Grid.Column="1" PlaceholderText="{loc:Tr Key=common.shown_to_peers}" TabIndex="120" Text="{Binding DisplayName}" automation:AutomationProperties.Name="{loc:Tr Key=common.device_name}" />
+          </Grid>
+
+          <Border Classes="inner-panel" IsVisible="{Binding IsShareDetailsVisible}">
+            <StackPanel Spacing="14">
+              <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.how_others_connect}" />
+                <Border Classes="status-pill" Grid.Column="1" VerticalAlignment="Top">
+                <TextBlock Classes="status-pill-text" Focusable="True" IsTabStop="True" TabIndex="121" Text="{Binding ShareSecuritySummary}" automation:AutomationProperties.Name="{Binding ShareSecuritySummary}" />
+              </Border>
+              </Grid>
+              <Grid ColumnDefinitions="170,*" ColumnSpacing="12">
+                <TextBlock Classes="field-label" VerticalAlignment="Center" Text="{loc:Tr Key=common.share_name}" />
+                <TextBlock Classes="selection-value" Grid.Column="1" Focusable="True" IsTabStop="True" TabIndex="122" Text="{Binding LocalShareName}" TextWrapping="Wrap" automation:AutomationProperties.Name="{Binding LocalShareName}" />
+              </Grid>
+              <Grid ColumnDefinitions="170,*" ColumnSpacing="12">
+                <TextBlock Classes="field-label" VerticalAlignment="Center" Text="{loc:Tr Key=common.host_name}" />
+                <TextBlock Classes="selection-value" Grid.Column="1" Focusable="True" IsTabStop="True" TabIndex="123" Text="{Binding LocalHostName}" TextWrapping="Wrap" automation:AutomationProperties.Name="{Binding LocalHostName}" />
+              </Grid>
+              <Grid ColumnDefinitions="170,*" ColumnSpacing="12">
+                <TextBlock Classes="field-label" VerticalAlignment="Top" Text="{loc:Tr Key=common.reachable_paths}" />
+                <TextBlock Classes="selection-value" Grid.Column="1" Focusable="True" IsTabStop="True" TabIndex="124" Text="{Binding LocalAddressSummary}" TextWrapping="Wrap" automation:AutomationProperties.Name="{Binding LocalAddressSummary}" />
+              </Grid>
+              <Grid ColumnDefinitions="170,*" ColumnSpacing="12">
+                <TextBlock Classes="field-label" VerticalAlignment="Center" Text="{loc:Tr Key=common.control_port}" />
+                <TextBlock Classes="selection-value" Grid.Column="1" Focusable="True" IsTabStop="True" TabIndex="125" Text="{Binding LocalSharePort}" TextWrapping="Wrap" automation:AutomationProperties.Name="{Binding LocalSharePort}" />
+              </Grid>
+              <TextBlock Classes="muted" Focusable="True" IsTabStop="True" TabIndex="126" Text="{Binding ShareAccessHint}" automation:AutomationProperties.Name="{Binding ShareAccessHint}" />
+            </StackPanel>
+          </Border>
+
+          <Border Classes="inner-panel" IsVisible="{Binding IsShareSupportWarningVisible}">
+            <StackPanel Spacing="6">
+              <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.sharing_support}" />
+              <TextBlock Classes="muted" Focusable="True" IsTabStop="True" TabIndex="127" Text="{Binding ShareSupportDetail}" TextWrapping="Wrap" automation:AutomationProperties.Name="{Binding ShareSupportDetail}" />
+            </StackPanel>
+          </Border>
+
+          <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+            <Button Classes="primary-action" Command="{Binding NextStepCommand}" Content="{loc:Tr Key=common.next}" TabIndex="130" automation:AutomationProperties.Name="{loc:Tr Key=common.next}" />
+            <TextBlock Grid.Column="1" Classes="muted" Text="{Binding RoleSummary}" VerticalAlignment="Center" />
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="stage-card" IsVisible="{Binding IsPeerStepVisible}">
+        <StackPanel Spacing="22">
+          <StackPanel Spacing="6">
+            <TextBlock Classes="stage-eyebrow" Focusable="True" IsTabStop="True" TabIndex="190" Text="{loc:Tr Key=step.2}" automation:AutomationProperties.Name="{loc:Tr Key=step.2}" />
+            <TextBlock Classes="stage-title" Focusable="True" IsTabStop="True" TabIndex="191" Text="{loc:Tr Key=stage.peer.title}" automation:AutomationProperties.Name="{loc:Tr Key=stage.peer.title}" />
+            <TextBlock Classes="stage-body" Focusable="True" IsTabStop="True" TabIndex="192" Text="{loc:Tr Key=stage.peer.body}" automation:AutomationProperties.Name="{loc:Tr Key=stage.peer.body}" />
+          </StackPanel>
+
+          <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="10">
+            <Button Classes="mode-tab" Classes.selected="{Binding IsDiscoveryConnectionSelected}" Command="{Binding UseDiscoveryEntryCommand}" TabIndex="200" automation:AutomationProperties.Name="{loc:Tr Key=peer.scan.automation}">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <Image Height="18" Width="18">
+                  <Image.Source>
+                    <i:IconImage Brush="{StaticResource AccentBrush}" Value="fa-solid fa-magnifying-glass" />
+                  </Image.Source>
+                </Image>
+                <TextBlock Classes="mode-tab-text" Text="{loc:Tr Key=common.scan}" />
+              </StackPanel>
+            </Button>
+            <Button Classes="mode-tab" Classes.selected="{Binding IsManualConnectionSelected}" Command="{Binding UseManualEntryCommand}" Grid.Column="1" TabIndex="210" automation:AutomationProperties.Name="{loc:Tr Key=peer.direct.automation}">
+              <StackPanel Orientation="Horizontal" Spacing="8">
+                <Image Height="18" Width="18">
+                  <Image.Source>
+                    <i:IconImage Brush="{StaticResource AccentBrush}" Value="fa-solid fa-plug" />
+                  </Image.Source>
+                </Image>
+                <TextBlock Classes="mode-tab-text" Text="{loc:Tr Key=common.direct}" />
+              </StackPanel>
+            </Button>
+            <Button Classes="secondary-action" Command="{Binding RefreshDiscoveryCommand}" Content="{loc:Tr Key=common.refresh}" Grid.Column="2" HorizontalAlignment="Right" IsVisible="{Binding IsDiscoveryConnectionSelected}" TabIndex="220" automation:AutomationProperties.Name="{loc:Tr Key=peer.refresh.automation}" />
+          </Grid>
+
+          <Border Classes="inner-panel" IsVisible="{Binding IsDirectCableStatusVisible}">
+            <StackPanel Spacing="6">
+              <TextBlock Classes="panel-title-small" Text="{Binding DirectCableStatusTitle}" />
+              <TextBlock Classes="muted" Focusable="True" IsTabStop="True" TabIndex="221" Text="{Binding DirectCableStatusDetail}" TextWrapping="Wrap" automation:AutomationProperties.Name="{Binding DirectCableStatusDetail}" />
+            </StackPanel>
+          </Border>
+
+          <Border Classes="inner-panel" IsVisible="{Binding IsDiscoveryConnectionSelected}">
+            <StackPanel Spacing="10">
+              <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.nearby_devices}" />
+                <TextBlock Grid.Column="1" Classes="muted" Focusable="True" IsTabStop="True" TabIndex="222" Text="{Binding KnownDeviceSummary}" VerticalAlignment="Center" automation:AutomationProperties.Name="{Binding KnownDeviceSummary}" />
+              </Grid>
+              <ListBox Classes="peer-list" ItemsSource="{Binding DeviceCards}" SelectedItem="{Binding SelectedDevice}" TabIndex="230" automation:AutomationProperties.Name="{loc:Tr Key=common.nearby_devices}" />
+              <TextBlock Classes="muted" Focusable="True" IsTabStop="True" IsVisible="{Binding HasNoDiscoveredDevices}" TabIndex="231" Text="{Binding NoDiscoveredDevicesHint}" automation:AutomationProperties.Name="{Binding NoDiscoveredDevicesHint}" />
+            </StackPanel>
+          </Border>
+
+          <Border Classes="inner-panel" IsVisible="{Binding IsManualConnectionSelected}">
+            <StackPanel Spacing="12">
+              <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.direct_address}" />
+              <Grid ColumnDefinitions="170,*" ColumnSpacing="12">
+                <TextBlock Classes="field-label" VerticalAlignment="Center" Text="{loc:Tr Key=common.name}" />
+                <TextBox Grid.Column="1" PlaceholderText="{loc:Tr Key=common.optional}" TabIndex="240" Text="{Binding ManualPeerName}" automation:AutomationProperties.Name="{loc:Tr Key=peer.target_name}" />
+              </Grid>
+              <Grid ColumnDefinitions="170,*" ColumnSpacing="12">
+                <TextBlock Classes="field-label" VerticalAlignment="Center" Text="{loc:Tr Key=common.address}" />
+                <TextBox Grid.Column="1" PlaceholderText="{loc:Tr Key=peer.address.placeholder}" TabIndex="250" Text="{Binding ManualPeerAddress}" automation:AutomationProperties.Name="{loc:Tr Key=common.address}" />
+              </Grid>
+              <Grid ColumnDefinitions="170,*" ColumnSpacing="12">
+                <TextBlock Classes="field-label" VerticalAlignment="Center" Text="{loc:Tr Key=common.port}" />
+                <TextBox Grid.Column="1" PlaceholderText="45211" TabIndex="260" Text="{Binding ManualPeerPortText}" automation:AutomationProperties.Name="{loc:Tr Key=peer.target_port}" />
+              </Grid>
+              <TextBlock Classes="muted" Focusable="True" IsTabStop="True" TabIndex="261" Text="{Binding ManualConnectionHint}" automation:AutomationProperties.Name="{Binding ManualConnectionHint}" />
+            </StackPanel>
+          </Border>
+
+          <Border Classes="selection-bar">
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+              <TextBlock Classes="field-label" Text="{loc:Tr Key=common.target}" VerticalAlignment="Center" />
+              <TextBlock Grid.Column="1" Classes="selection-value" Focusable="True" IsTabStop="True" TabIndex="262" Text="{Binding SelectedDeviceSummary}" TextWrapping="Wrap" automation:AutomationProperties.Name="{Binding SelectedDeviceSummary}" />
+            </Grid>
+          </Border>
+
+          <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="10">
+            <Button Classes="secondary-action" Command="{Binding PreviousStepCommand}" Content="{loc:Tr Key=common.back}" TabIndex="270" automation:AutomationProperties.Name="{loc:Tr Key=common.back}" />
+            <Button Classes="primary-action" Command="{Binding NextStepCommand}" Content="{loc:Tr Key=common.next}" Grid.Column="1" TabIndex="280" automation:AutomationProperties.Name="{loc:Tr Key=common.next}" />
+            <TextBlock Grid.Column="2" Classes="muted" Text="{Binding ConnectionModeSummary}" VerticalAlignment="Center" />
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="stage-card" IsVisible="{Binding IsLaunchStepVisible}">
+        <StackPanel Spacing="22">
+          <StackPanel Spacing="6">
+            <TextBlock Classes="stage-eyebrow" Focusable="True" IsTabStop="True" TabIndex="290" Text="{Binding LaunchStepEyebrow}" automation:AutomationProperties.Name="{Binding LaunchStepEyebrow}" />
+            <TextBlock Classes="stage-title" Focusable="True" IsTabStop="True" TabIndex="291" Text="{Binding LaunchStageTitle}" automation:AutomationProperties.Name="{Binding LaunchStageTitle}" />
+            <TextBlock Classes="stage-body" Focusable="True" IsTabStop="True" TabIndex="292" Text="{Binding LaunchStageBody}" automation:AutomationProperties.Name="{Binding LaunchStageBody}" />
+          </StackPanel>
+
+          <Border Classes="launch-banner">
+            <StackPanel Spacing="6">
+              <TextBlock Classes="banner-kicker" Focusable="True" IsTabStop="True" TabIndex="293" Text="{loc:Tr Key=common.session}" automation:AutomationProperties.Name="{loc:Tr Key=common.session}" />
+              <TextBlock Classes="banner-title" Focusable="True" IsTabStop="True" TabIndex="294" Text="{Binding ReviewHeadline}" automation:AutomationProperties.Name="{Binding ReviewHeadline}" />
+              <TextBlock Classes="banner-body" Focusable="True" IsTabStop="True" TabIndex="295" Text="{Binding ReviewTargetSummary}" automation:AutomationProperties.Name="{Binding ReviewTargetSummary}" />
+            </StackPanel>
+          </Border>
+
+          <Border Classes="inner-panel" IsVisible="{Binding IsFirewallStatusVisible}">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+              <StackPanel Spacing="6">
+                <TextBlock Classes="panel-title-small" Focusable="True" IsTabStop="True" TabIndex="296" Text="{Binding FirewallStatusTitle}" automation:AutomationProperties.Name="{Binding FirewallStatusTitle}" />
+                <TextBlock Classes="muted" Focusable="True" IsTabStop="True" TabIndex="297" Text="{Binding FirewallStatusDetail}" TextWrapping="Wrap" automation:AutomationProperties.Name="{Binding FirewallStatusDetail}" />
+              </StackPanel>
+              <Button Classes="secondary-action" Command="{Binding ConfigureFirewallCommand}" Content="{Binding FirewallActionLabel}" Grid.Column="1" IsVisible="{Binding IsFirewallActionVisible}" TabIndex="300" VerticalAlignment="Center" automation:AutomationProperties.Name="{loc:Tr Key=firewall.configure.automation}" />
+            </Grid>
+          </Border>
+
+          <Grid ColumnDefinitions="*,*" ColumnSpacing="12" IsVisible="{Binding IsShareFlowVisible}">
+            <Border Classes="metric-card">
+              <StackPanel Spacing="4">
+                <TextBlock Classes="field-label" Text="{loc:Tr Key=common.mode}" />
+                <TextBlock Classes="metric-value" Focusable="True" IsTabStop="True" TabIndex="301" Text="{Binding DirectionSummary}" automation:AutomationProperties.Name="{Binding DirectionSummary}" />
+              </StackPanel>
+            </Border>
+            <Border Classes="metric-card" Grid.Column="1">
+              <StackPanel Spacing="4">
+                <TextBlock Classes="field-label" Text="{loc:Tr Key=common.security}" />
+                <TextBlock Classes="metric-value" Focusable="True" IsTabStop="True" TabIndex="303" Text="{Binding AccessSummary}" automation:AutomationProperties.Name="{Binding AccessSummary}" />
+              </StackPanel>
+            </Border>
+          </Grid>
+
+          <Grid ColumnDefinitions="*,*,*" ColumnSpacing="12" IsVisible="{Binding IsControlFlowVisible}">
+            <Border Classes="metric-card">
+              <StackPanel Spacing="4">
+                <TextBlock Classes="field-label" Text="{loc:Tr Key=common.mode}" />
+                <TextBlock Classes="metric-value" Focusable="True" IsTabStop="True" TabIndex="301" Text="{Binding DirectionSummary}" automation:AutomationProperties.Name="{Binding DirectionSummary}" />
+              </StackPanel>
+            </Border>
+            <Border Classes="metric-card" Grid.Column="1">
+              <StackPanel Spacing="4">
+                <TextBlock Classes="field-label" Text="{loc:Tr Key=common.security}" />
+                <TextBlock Classes="metric-value" Focusable="True" IsTabStop="True" TabIndex="303" Text="{Binding AccessSummary}" automation:AutomationProperties.Name="{Binding AccessSummary}" />
+              </StackPanel>
+            </Border>
+            <Border Classes="metric-card" Grid.Column="2">
+              <StackPanel Spacing="4">
+                <TextBlock Classes="field-label" Text="{loc:Tr Key=common.quality}" />
+                <TextBlock Classes="metric-value" Focusable="True" IsTabStop="True" TabIndex="304" Text="{Binding ReviewResolutionSummary}" automation:AutomationProperties.Name="{Binding ReviewResolutionSummary}" />
+              </StackPanel>
+            </Border>
+          </Grid>
+
+          <Border Classes="selection-bar">
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+              <TextBlock Classes="field-label" Text="{loc:Tr Key=common.state}" VerticalAlignment="Center" />
+              <TextBlock Grid.Column="1" Classes="selection-value" Focusable="True" IsTabStop="True" TabIndex="305" Text="{Binding StatusDetail}" TextWrapping="Wrap" automation:AutomationProperties.Name="{Binding StatusDetail}" />
+            </Grid>
+          </Border>
+
+          <Border Classes="inner-panel" IsVisible="{Binding IsShareSupportWarningVisible}">
+            <TextBlock Classes="muted" Focusable="True" IsTabStop="True" TabIndex="306" Text="{Binding ShareSupportDetail}" TextWrapping="Wrap" automation:AutomationProperties.Name="{Binding ShareSupportDetail}" />
+          </Border>
+
+          <Border Classes="inner-panel" IsVisible="{Binding IsDirectCableStatusVisible}">
+            <StackPanel Spacing="6">
+              <TextBlock Classes="panel-title-small" Text="{Binding DirectCableStatusTitle}" />
+              <TextBlock Classes="muted" Focusable="True" IsTabStop="True" TabIndex="307" Text="{Binding DirectCableStatusDetail}" TextWrapping="Wrap" automation:AutomationProperties.Name="{Binding DirectCableStatusDetail}" />
+            </StackPanel>
+          </Border>
+
+          <Grid ColumnDefinitions="Auto,Auto,Auto,*,Auto" ColumnSpacing="10">
+            <Button Classes="secondary-action" Command="{Binding PreviousStepCommand}" Content="{loc:Tr Key=common.back}" IsVisible="{Binding IsLaunchBackVisible}" TabIndex="310" automation:AutomationProperties.Name="{loc:Tr Key=common.back}" />
+            <Button Classes="primary-action" Command="{Binding ConnectCommand}" Content="{Binding PrimarySessionActionLabel}" Grid.Column="1" IsVisible="{Binding IsPrimarySessionActionVisible}" TabIndex="320" automation:AutomationProperties.Name="{Binding PrimarySessionActionLabel}" />
+            <Button Classes="secondary-action" Command="{Binding StopShareCommand}" Content="{loc:Tr Key=common.stop_sharing}" Grid.Column="2" IsVisible="{Binding IsStopShareVisible}" TabIndex="330" automation:AutomationProperties.Name="{loc:Tr Key=common.stop_sharing}" />
+            <Button Classes="secondary-action" Command="{Binding CancelLaunchCommand}" Content="{loc:Tr Key=common.cancel}" Grid.Column="2" IsVisible="{Binding IsCancelLaunchVisible}" TabIndex="331" automation:AutomationProperties.Name="{loc:Tr Key=launch.cancel.automation}" />
+            <Button Classes="secondary-action" Command="{Binding DisconnectCommand}" Content="{loc:Tr Key=common.disconnect}" Grid.Column="2" IsVisible="{Binding IsDisconnectVisible}" TabIndex="330" automation:AutomationProperties.Name="{loc:Tr Key=common.disconnect}" />
+            <Button Classes="ghost-action" Command="{Binding GoToOptionsStepCommand}" Content="{loc:Tr Key=common.settings}" Grid.Column="4" IsVisible="{Binding IsLaunchAdvancedVisible}" TabIndex="340" automation:AutomationProperties.Name="{loc:Tr Key=common.open_settings}" />
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="stage-card" IsVisible="{Binding IsOptionsStepVisible}">
+        <StackPanel Spacing="22">
+          <StackPanel Spacing="6">
+            <TextBlock Classes="stage-eyebrow" Focusable="True" IsTabStop="True" TabIndex="390" Text="{loc:Tr Key=common.settings}" automation:AutomationProperties.Name="{loc:Tr Key=common.settings}" />
+            <TextBlock Classes="stage-title" Focusable="True" IsTabStop="True" TabIndex="391" Text="{loc:Tr Key=stage.settings.title}" automation:AutomationProperties.Name="{loc:Tr Key=stage.settings.title}" />
+            <TextBlock Classes="stage-body" Focusable="True" IsTabStop="True" TabIndex="392" Text="{loc:Tr Key=stage.settings.body}" automation:AutomationProperties.Name="{loc:Tr Key=stage.settings.body}" />
+          </StackPanel>
+
+          <Grid ColumnDefinitions="*,*" ColumnSpacing="16" RowDefinitions="Auto,Auto" RowSpacing="16">
+            <Border Classes="inner-panel" Grid.Column="0" Grid.Row="0">
+              <StackPanel Spacing="12">
+                <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.network}" />
+                <Border Classes="option-row" IsVisible="{Binding IsDirectCableStatusVisible}">
+                  <StackPanel Spacing="6">
+                    <TextBlock Classes="card-title" Text="{Binding DirectCableStatusTitle}" />
+                    <TextBlock Classes="muted" Text="{Binding DirectCableStatusDetail}" TextWrapping="Wrap" />
+                  </StackPanel>
+                </Border>
+                <Grid ColumnDefinitions="140,*" ColumnSpacing="12">
+                  <TextBlock Classes="field-label" Text="{loc:Tr Key=common.discovery}" VerticalAlignment="Center" />
+                  <TextBox Grid.Column="1" TabIndex="680" Text="{Binding DiscoveryPortText}" automation:AutomationProperties.Name="{loc:Tr Key=settings.discovery_port}" />
+                </Grid>
+                <Grid ColumnDefinitions="140,*" ColumnSpacing="12">
+                  <TextBlock Classes="field-label" Text="{loc:Tr Key=common.control}" VerticalAlignment="Center" />
+                  <TextBox Grid.Column="1" TabIndex="690" Text="{Binding ControlPortText}" automation:AutomationProperties.Name="{loc:Tr Key=settings.control_port}" />
+                </Grid>
+                <Grid ColumnDefinitions="140,*" ColumnSpacing="12">
+                  <TextBlock Classes="field-label" Text="{loc:Tr Key=common.passphrase}" VerticalAlignment="Center" />
+                  <TextBox Grid.Column="1" PasswordChar="*" PlaceholderText="{loc:Tr Key=common.optional}" TabIndex="700" Text="{Binding SessionPassphrase}" automation:AutomationProperties.HelpText="{loc:Tr Key=common.masked_input}" automation:AutomationProperties.Name="{loc:Tr Key=settings.session_passphrase}" />
+                </Grid>
+                <Border Classes="company-panel">
+                  <StackPanel Spacing="8">
+                    <TextBlock Classes="field-label" Text="{loc:Tr Key=common.built_by}" />
+                    <Image Classes="company-banner" HorizontalAlignment="Left" Source="avares://ShadowLink/Assets/company-banner.png" />
+                  </StackPanel>
+                </Border>
+              </StackPanel>
+            </Border>
+
+            <Border Classes="inner-panel" Grid.Column="1" Grid.Row="0">
+              <StackPanel Spacing="10">
+                <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.policy}" />
+                <Border Classes="option-row">
+                  <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                    <CheckBox IsChecked="{Binding EnableKeyboardRelay}" TabIndex="710" automation:AutomationProperties.Name="{loc:Tr Key=settings.remote_keyboard}" />
+                    <TextBlock Classes="muted" Grid.Column="1" Text="{loc:Tr Key=settings.remote_keyboard}" />
+                  </Grid>
+                </Border>
+                <Border Classes="option-row">
+                  <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                    <CheckBox IsChecked="{Binding EnableMouseRelay}" TabIndex="720" automation:AutomationProperties.Name="{loc:Tr Key=settings.remote_mouse}" />
+                    <TextBlock Classes="muted" Grid.Column="1" Text="{loc:Tr Key=settings.remote_mouse}" />
+                  </Grid>
+                </Border>
+                <Border Classes="option-row">
+                  <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                    <CheckBox IsChecked="{Binding AutoStartDiscovery}" TabIndex="730" automation:AutomationProperties.Name="{loc:Tr Key=settings.auto_scan}" />
+                    <TextBlock Classes="muted" Grid.Column="1" Text="{loc:Tr Key=settings.auto_scan}" />
+                  </Grid>
+                </Border>
+                <Border Classes="option-row">
+                  <Grid ColumnDefinitions="Auto,*" ColumnSpacing="8">
+                    <CheckBox IsChecked="{Binding RememberRecentPeers}" TabIndex="740" automation:AutomationProperties.Name="{loc:Tr Key=settings.remember_peers}" />
+                    <TextBlock Classes="muted" Grid.Column="1" Text="{loc:Tr Key=settings.remember_peers}" />
+                  </Grid>
+                </Border>
+              </StackPanel>
+            </Border>
+
+            <Border Classes="inner-panel" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+              <StackPanel Spacing="10">
+                <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.shortcuts}" />
+                <ItemsControl ItemsSource="{Binding ShortcutBindings}" />
+              </StackPanel>
+            </Border>
+
+          </Grid>
+
+          <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="10">
+            <Button Classes="secondary-action" Command="{Binding GoToAdvancedStepCommand}" Content="{loc:Tr Key=common.advanced}" TabIndex="780" automation:AutomationProperties.Name="{loc:Tr Key=settings.open_advanced}" />
+            <Button Classes="primary-action" Command="{Binding CloseOptionsCommand}" Content="{loc:Tr Key=common.save}" Grid.Column="1" TabIndex="790" automation:AutomationProperties.Name="{loc:Tr Key=settings.save}" />
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="stage-card" IsVisible="{Binding IsAdvancedStepVisible}">
+        <StackPanel Spacing="22">
+          <StackPanel Spacing="6">
+            <TextBlock Classes="stage-eyebrow" Focusable="True" IsTabStop="True" TabIndex="791" Text="{loc:Tr Key=common.advanced}" automation:AutomationProperties.Name="{loc:Tr Key=common.advanced}" />
+            <TextBlock Classes="stage-title" Focusable="True" IsTabStop="True" TabIndex="792" Text="{loc:Tr Key=stage.advanced.title}" automation:AutomationProperties.Name="{loc:Tr Key=stage.advanced.title}" />
+            <TextBlock Classes="stage-body" Focusable="True" IsTabStop="True" TabIndex="793" Text="{loc:Tr Key=stage.advanced.body}" automation:AutomationProperties.Name="{loc:Tr Key=stage.advanced.body}" />
+          </StackPanel>
+
+          <Border Classes="inner-panel">
+            <StackPanel Spacing="12">
+              <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.viewing}" />
+              <Border Classes="option-row">
+                <StackPanel Spacing="12">
+                  <TextBlock Classes="muted" Text="{loc:Tr Key=advanced.viewing.body}" TextWrapping="Wrap" />
+                  <Grid ColumnDefinitions="140,*" ColumnSpacing="12">
+                    <TextBlock Classes="field-label" Text="{loc:Tr Key=common.resolution}" VerticalAlignment="Top" />
+                    <StackPanel Grid.Column="1" Spacing="10">
+                      <WrapPanel Orientation="Horizontal">
+                        <Button Classes="mode-tab" Classes.selected="{Binding IsNativePresetSelected}" Command="{Binding ApplyNativePresetCommand}" Content="{loc:Tr Key=common.native}" TabIndex="794" automation:AutomationProperties.Name="{loc:Tr Key=advanced.resolution.native}" />
+                        <Button Classes="mode-tab" Classes.selected="{Binding IsFullHdPresetSelected}" Command="{Binding ApplyFullHdPresetCommand}" Content="1080p" TabIndex="795" automation:AutomationProperties.Name="{loc:Tr Key=advanced.resolution.1080p}" />
+                        <Button Classes="mode-tab" Classes.selected="{Binding IsHdPresetSelected}" Command="{Binding ApplyHdPresetCommand}" Content="720p" TabIndex="796" automation:AutomationProperties.Name="{loc:Tr Key=advanced.resolution.720p}" />
+                        <Button Classes="mode-tab" Classes.selected="{Binding IsLaptopPresetSelected}" Command="{Binding ApplyLaptopPresetCommand}" Content="1366x768" TabIndex="797" automation:AutomationProperties.Name="{loc:Tr Key=advanced.resolution.1366x768}" />
+                        <Button Classes="mode-tab" Classes.selected="{Binding IsSvgaPresetSelected}" Command="{Binding ApplySvgaPresetCommand}" Content="800x600" TabIndex="798" automation:AutomationProperties.Name="{loc:Tr Key=advanced.resolution.800x600}" />
+                      </WrapPanel>
+                      <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                        <TextBox PlaceholderText="{loc:Tr Key=common.width}" TabIndex="799" Text="{Binding StreamWidthText}" automation:AutomationProperties.Name="{loc:Tr Key=common.width}" />
+                        <TextBox Grid.Column="1" PlaceholderText="{loc:Tr Key=common.height}" TabIndex="800" Text="{Binding StreamHeightText}" automation:AutomationProperties.Name="{loc:Tr Key=common.height}" />
+                      </Grid>
+                    </StackPanel>
+                  </Grid>
+                  <Grid ColumnDefinitions="140,*" ColumnSpacing="12">
+                    <TextBlock Classes="field-label" Text="{loc:Tr Key=common.zoom_mode}" VerticalAlignment="Top" />
+                    <WrapPanel Grid.Column="1" Orientation="Horizontal">
+                      <Button Classes="mode-tab" Classes.selected="{Binding IsDisplayScaleFitSelected}" Command="{Binding SetDisplayScaleFitCommand}" Content="{loc:Tr Key=common.actual_size}" TabIndex="801" automation:AutomationProperties.Name="{loc:Tr Key=common.actual_size}" />
+                      <Button Classes="mode-tab" Classes.selected="{Binding IsDisplayScaleZoomToFitSelected}" Command="{Binding SetDisplayScaleZoomToFitCommand}" Content="{loc:Tr Key=common.zoom_to_fit}" TabIndex="802" automation:AutomationProperties.Name="{loc:Tr Key=common.zoom_to_fit}" />
+                      <Button Classes="mode-tab" Classes.selected="{Binding IsDisplayScaleFillSelected}" Command="{Binding SetDisplayScaleFillCommand}" Content="{loc:Tr Key=common.fill}" TabIndex="803" automation:AutomationProperties.Name="{loc:Tr Key=common.fill}" />
+                    </WrapPanel>
+                  </Grid>
+                  <Grid ColumnDefinitions="140,*" ColumnSpacing="12">
+                    <TextBlock Classes="field-label" Text="{loc:Tr Key=common.frame_rate}" VerticalAlignment="Center" />
+                    <TextBox Grid.Column="1" PlaceholderText="30" TabIndex="804" Text="{Binding StreamFrameRateText}" automation:AutomationProperties.Name="{loc:Tr Key=advanced.frame_rate}" />
+                  </Grid>
+                  <Grid ColumnDefinitions="140,*" ColumnSpacing="12">
+                    <TextBlock Classes="field-label" Text="{loc:Tr Key=common.color_mode}" VerticalAlignment="Top" />
+                    <WrapPanel Grid.Column="1" Orientation="Horizontal">
+                      <Button Classes="mode-tab" Classes.selected="{Binding IsBgra32ColorModeSelected}" Command="{Binding SetBgra32ColorModeCommand}" Content="32-bit" TabIndex="805" automation:AutomationProperties.Name="{loc:Tr Key=advanced.color.32}" />
+                      <Button Classes="mode-tab" Classes.selected="{Binding IsBgr24ColorModeSelected}" Command="{Binding SetBgr24ColorModeCommand}" Content="24-bit" TabIndex="806" automation:AutomationProperties.Name="{loc:Tr Key=advanced.color.24}" />
+                      <Button Classes="mode-tab" Classes.selected="{Binding IsRgb565ColorModeSelected}" Command="{Binding SetRgb565ColorModeCommand}" Content="16-bit" TabIndex="807" automation:AutomationProperties.Name="{loc:Tr Key=advanced.color.16}" />
+                      <Button Classes="mode-tab" Classes.selected="{Binding IsRgb332ColorModeSelected}" Command="{Binding SetRgb332ColorModeCommand}" Content="8-bit" TabIndex="808" automation:AutomationProperties.Name="{loc:Tr Key=advanced.color.8}" />
+                      <Button Classes="mode-tab" Classes.selected="{Binding IsIndexed4ColorModeSelected}" Command="{Binding SetIndexed4ColorModeCommand}" Content="4-bit" TabIndex="809" automation:AutomationProperties.Name="{loc:Tr Key=advanced.color.4}" />
+                    </WrapPanel>
+                  </Grid>
+                  <Grid ColumnDefinitions="140,*" ColumnSpacing="12">
+                    <TextBlock Classes="field-label" Text="{loc:Tr Key=common.tile_size}" VerticalAlignment="Top" />
+                    <StackPanel Grid.Column="1" Spacing="10">
+                      <WrapPanel Orientation="Horizontal">
+                        <Button Classes="mode-tab" Classes.selected="{Binding IsTile8PresetSelected}" Command="{Binding ApplyTile8PresetCommand}" Content="8" TabIndex="810" automation:AutomationProperties.Name="{loc:Tr Key=advanced.tile.8}" />
+                        <Button Classes="mode-tab" Classes.selected="{Binding IsTile16PresetSelected}" Command="{Binding ApplyTile16PresetCommand}" Content="16" TabIndex="811" automation:AutomationProperties.Name="{loc:Tr Key=advanced.tile.16}" />
+                        <Button Classes="mode-tab" Classes.selected="{Binding IsTile32PresetSelected}" Command="{Binding ApplyTile32PresetCommand}" Content="32" TabIndex="812" automation:AutomationProperties.Name="{loc:Tr Key=advanced.tile.32}" />
+                      </WrapPanel>
+                      <TextBox PlaceholderText="16" TabIndex="813" Text="{Binding StreamTileSizeText}" automation:AutomationProperties.Name="{loc:Tr Key=advanced.tile_size}" />
+                    </StackPanel>
+                  </Grid>
+                  <Grid ColumnDefinitions="140,*" ColumnSpacing="12">
+                    <TextBlock Classes="field-label" Text="{loc:Tr Key=common.dictionary}" VerticalAlignment="Top" />
+                    <StackPanel Grid.Column="1" Spacing="10">
+                      <WrapPanel Orientation="Horizontal">
+                        <Button Classes="mode-tab" Classes.selected="{Binding IsDictionary512PresetSelected}" Command="{Binding ApplyDictionary512PresetCommand}" Content="512 MB" TabIndex="814" automation:AutomationProperties.Name="{loc:Tr Key=advanced.dictionary.512}" />
+                        <Button Classes="mode-tab" Classes.selected="{Binding IsDictionary1024PresetSelected}" Command="{Binding ApplyDictionary1024PresetCommand}" Content="1 GB" TabIndex="815" automation:AutomationProperties.Name="{loc:Tr Key=advanced.dictionary.1024}" />
+                        <Button Classes="mode-tab" Classes.selected="{Binding IsDictionary2048PresetSelected}" Command="{Binding ApplyDictionary2048PresetCommand}" Content="2 GB" TabIndex="816" automation:AutomationProperties.Name="{loc:Tr Key=advanced.dictionary.2048}" />
+                        <Button Classes="mode-tab" Classes.selected="{Binding IsDictionary4096PresetSelected}" Command="{Binding ApplyDictionary4096PresetCommand}" Content="4 GB" TabIndex="817" automation:AutomationProperties.Name="{loc:Tr Key=advanced.dictionary.4096}" />
+                        <Button Classes="mode-tab" Classes.selected="{Binding IsDictionary8192PresetSelected}" Command="{Binding ApplyDictionary8192PresetCommand}" Content="8 GB" TabIndex="818" automation:AutomationProperties.Name="{loc:Tr Key=advanced.dictionary.8192}" />
+                        <Button Classes="mode-tab" Classes.selected="{Binding IsDictionary16384PresetSelected}" Command="{Binding ApplyDictionary16384PresetCommand}" Content="16 GB" TabIndex="819" automation:AutomationProperties.Name="{loc:Tr Key=advanced.dictionary.16384}" />
+                      </WrapPanel>
+                      <TextBox PlaceholderText="1024" TabIndex="820" Text="{Binding StreamDictionarySizeMbText}" automation:AutomationProperties.Name="{loc:Tr Key=advanced.dictionary_size}" />
+                    </StackPanel>
+                  </Grid>
+                  <Grid ColumnDefinitions="140,*" ColumnSpacing="12">
+                    <TextBlock Classes="field-label" Text="{loc:Tr Key=common.patterns}" VerticalAlignment="Top" />
+                    <StackPanel Grid.Column="1" Spacing="8">
+                      <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                        <Slider Minimum="5"
+                                Maximum="95"
+                                SmallChange="1"
+                                LargeChange="5"
+                                TickFrequency="5"
+                                IsSnapToTickEnabled="True"
+                                TabIndex="821"
+                                Value="{Binding StreamStaticCodebookSharePercent}"
+                                automation:AutomationProperties.Name="{loc:Tr Key=advanced.patterns.slider}"
+                                automation:AutomationProperties.HelpText="{loc:Tr Key=advanced.patterns.slider_help}" />
+                        <TextBlock Grid.Column="1"
+                                   Classes="selection-value"
+                                   VerticalAlignment="Center"
+                                   Text="{Binding StreamStaticCodebookSharePercentText, StringFormat='{}{0}%'}"
+                                   automation:AutomationProperties.Name="{Binding StreamStaticCodebookSharePercentText, StringFormat='{}{0}%'}" />
+                      </Grid>
+                    </StackPanel>
+                  </Grid>
+                </StackPanel>
+              </Border>
+            </StackPanel>
+          </Border>
+
+          <Grid ColumnDefinitions="Auto,Auto,*" ColumnSpacing="10">
+            <Button Classes="secondary-action" Command="{Binding PreviousStepCommand}" Content="{loc:Tr Key=common.back}" TabIndex="822" automation:AutomationProperties.Name="{loc:Tr Key=common.back}" />
+            <Button Classes="primary-action" Command="{Binding CloseOptionsCommand}" Content="{loc:Tr Key=common.save}" Grid.Column="1" TabIndex="823" automation:AutomationProperties.Name="{loc:Tr Key=common.save}" />
+          </Grid>
+        </StackPanel>
+      </Border>
+
+      <Border Classes="stage-card" IsVisible="{Binding IsToolsStepVisible}">
+        <StackPanel Spacing="22">
+          <StackPanel Spacing="6">
+            <TextBlock Classes="stage-eyebrow" Focusable="True" IsTabStop="True" TabIndex="795" Text="{loc:Tr Key=common.tools}" automation:AutomationProperties.Name="{loc:Tr Key=common.tools}" />
+            <TextBlock Classes="stage-title" Focusable="True" IsTabStop="True" TabIndex="796" Text="{loc:Tr Key=stage.tools.title}" automation:AutomationProperties.Name="{loc:Tr Key=stage.tools.title}" />
+            <TextBlock Classes="stage-body" Focusable="True" IsTabStop="True" TabIndex="797" Text="{loc:Tr Key=stage.tools.body}" automation:AutomationProperties.Name="{loc:Tr Key=stage.tools.body}" />
+          </StackPanel>
+
+          <Border Classes="inner-panel" IsVisible="{Binding IsProtectedWindowsControlLimited}">
+            <TextBlock Classes="muted" Focusable="True" IsTabStop="True" TabIndex="798" Text="{Binding ProtectedWindowsControlSummary}" TextWrapping="Wrap" automation:AutomationProperties.Name="{Binding ProtectedWindowsControlSummary}" />
+          </Border>
+
+          <Border Classes="inner-panel">
+            <TextBlock Classes="muted" Focusable="True" IsTabStop="True" TabIndex="799" Text="{Binding RemoteToolsPlatformSummary}" TextWrapping="Wrap" automation:AutomationProperties.Name="{Binding RemoteToolsPlatformSummary}" />
+          </Border>
+
+          <Border Classes="inner-panel">
+            <StackPanel Spacing="14">
+              <Grid ColumnDefinitions="*,*" ColumnSpacing="16">
+                <StackPanel Spacing="6">
+                  <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.clipboard}" />
+                  <TextBlock Classes="muted" Text="{loc:Tr Key=tools.clipboard_sync_body}" TextWrapping="Wrap" />
+                </StackPanel>
+                <StackPanel Grid.Column="1" Spacing="10">
+                  <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.files}" />
+                  <TextBlock Classes="muted" Text="{loc:Tr Key=tools.files.body}" TextWrapping="Wrap" />
+                  <WrapPanel Orientation="Horizontal">
+                    <Button Classes="secondary-action" Command="{Binding SendFilesCommand}" Content="{loc:Tr Key=tools.send_files}" TabIndex="799" automation:AutomationProperties.Name="{loc:Tr Key=tools.send_files}" />
+                    <Button Classes="secondary-action" Command="{Binding RequestFilesFromPeerCommand}" Content="{loc:Tr Key=tools.request_files}" TabIndex="799" automation:AutomationProperties.Name="{loc:Tr Key=tools.request_files}" />
+                  </WrapPanel>
+                </StackPanel>
+              </Grid>
+            </StackPanel>
+          </Border>
+
+          <Grid ColumnDefinitions="*,*" ColumnSpacing="16" RowDefinitions="Auto,Auto" RowSpacing="16">
+            <Border Classes="inner-panel" Grid.Column="0" Grid.Row="0" IsVisible="{Binding IsWindowsRemoteToolsVisible}">
+              <StackPanel Spacing="12">
+                <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.windows}" />
+                <WrapPanel Orientation="Horizontal" ItemWidth="180">
+                  <Button Classes="secondary-action" Command="{Binding OpenRemoteStartMenuCommand}" Content="{loc:Tr Key=tools.windows.start_menu}" TabIndex="800" automation:AutomationProperties.Name="{loc:Tr Key=tools.windows.start_menu}" />
+                  <Button Classes="secondary-action" Command="{Binding OpenRemoteRunDialogCommand}" Content="{loc:Tr Key=tools.windows.run}" TabIndex="810" automation:AutomationProperties.Name="{loc:Tr Key=tools.windows.run}" />
+                  <Button Classes="secondary-action" Command="{Binding OpenRemoteExplorerCommand}" Content="{loc:Tr Key=tools.windows.explorer}" TabIndex="820" automation:AutomationProperties.Name="{loc:Tr Key=tools.windows.explorer}" />
+                  <Button Classes="secondary-action" Command="{Binding OpenRemoteSettingsCommand}" Content="{loc:Tr Key=tools.windows.settings}" TabIndex="830" automation:AutomationProperties.Name="{loc:Tr Key=tools.windows.settings}" />
+                  <Button Classes="secondary-action" Command="{Binding LockRemoteScreenCommand}" Content="{loc:Tr Key=tools.lock_screen}" TabIndex="835" automation:AutomationProperties.Name="{loc:Tr Key=tools.lock_screen}" />
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <Border Classes="inner-panel" Grid.Column="1" Grid.Row="0" IsVisible="{Binding IsWindowsRemoteToolsVisible}">
+              <StackPanel Spacing="12">
+                <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.utilities}" />
+                <WrapPanel Orientation="Horizontal" ItemWidth="180">
+                  <Button Classes="secondary-action" Command="{Binding OpenRemoteTaskManagerCommand}" Content="{loc:Tr Key=tools.task_manager}" TabIndex="840" automation:AutomationProperties.Name="{loc:Tr Key=tools.task_manager}" />
+                  <Button Classes="secondary-action" Command="{Binding OpenRemoteKeyboardCommand}" Content="{loc:Tr Key=tools.on_screen_keyboard}" TabIndex="850" automation:AutomationProperties.Name="{loc:Tr Key=tools.on_screen_keyboard}" />
+                  <Button Classes="secondary-action" Command="{Binding OpenRemoteAppSwitcherCommand}" Content="{loc:Tr Key=tools.app_switcher}" TabIndex="852" automation:AutomationProperties.Name="{loc:Tr Key=tools.app_switcher}" />
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <Border Classes="inner-panel" Grid.Column="0" Grid.Row="0" IsVisible="{Binding IsMacRemoteToolsVisible}">
+              <StackPanel Spacing="12">
+                <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.macos}" />
+                <WrapPanel Orientation="Horizontal" ItemWidth="180">
+                  <Button Classes="secondary-action" Command="{Binding OpenRemoteSpotlightCommand}" Content="{loc:Tr Key=tools.spotlight}" TabIndex="800" automation:AutomationProperties.Name="{loc:Tr Key=tools.spotlight}" />
+                  <Button Classes="secondary-action" Command="{Binding OpenRemoteFinderCommand}" Content="{loc:Tr Key=tools.finder_window}" TabIndex="810" automation:AutomationProperties.Name="{loc:Tr Key=tools.finder_window}" />
+                  <Button Classes="secondary-action" Command="{Binding OpenRemoteMissionControlCommand}" Content="{loc:Tr Key=tools.mission_control}" TabIndex="820" automation:AutomationProperties.Name="{loc:Tr Key=tools.mission_control}" />
+                  <Button Classes="secondary-action" Command="{Binding LockRemoteScreenCommand}" Content="{loc:Tr Key=tools.lock_screen}" TabIndex="830" automation:AutomationProperties.Name="{loc:Tr Key=tools.lock_screen}" />
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <Border Classes="inner-panel" Grid.Column="1" Grid.Row="0" IsVisible="{Binding IsMacRemoteToolsVisible}">
+              <StackPanel Spacing="12">
+                <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.utilities}" />
+                <WrapPanel Orientation="Horizontal" ItemWidth="180">
+                  <Button Classes="secondary-action" Command="{Binding OpenRemoteForceQuitCommand}" Content="{loc:Tr Key=tools.force_quit}" TabIndex="840" automation:AutomationProperties.Name="{loc:Tr Key=tools.force_quit}" />
+                  <Button Classes="secondary-action" Command="{Binding OpenRemoteAppSwitcherCommand}" Content="{loc:Tr Key=tools.app_switcher}" TabIndex="850" automation:AutomationProperties.Name="{loc:Tr Key=tools.app_switcher}" />
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <Border Classes="inner-panel" Grid.Column="0" Grid.Row="0" IsVisible="{Binding IsLinuxRemoteToolsVisible}">
+              <StackPanel Spacing="12">
+                <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.linux}" />
+                <WrapPanel Orientation="Horizontal" ItemWidth="180">
+                  <Button Classes="secondary-action" Command="{Binding OpenRemoteTerminalCommand}" Content="{loc:Tr Key=tools.terminal}" TabIndex="800" automation:AutomationProperties.Name="{loc:Tr Key=tools.terminal}" />
+                  <Button Classes="secondary-action" Command="{Binding OpenRemoteAppSwitcherCommand}" Content="{loc:Tr Key=tools.app_switcher}" TabIndex="810" automation:AutomationProperties.Name="{loc:Tr Key=tools.app_switcher}" />
+                  <Button Classes="secondary-action" Command="{Binding LockRemoteScreenCommand}" Content="{loc:Tr Key=tools.lock_screen}" TabIndex="820" automation:AutomationProperties.Name="{loc:Tr Key=tools.lock_screen}" />
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <Border Classes="inner-panel" Grid.Column="1" Grid.Row="0" IsVisible="{Binding IsLinuxRemoteToolsVisible}">
+              <StackPanel Spacing="12">
+                <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.notes}" />
+                <TextBlock Classes="muted" Text="{loc:Tr Key=tools.linux.note}" TextWrapping="Wrap" />
+              </StackPanel>
+            </Border>
+
+            <Border Classes="inner-panel" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0" IsVisible="{Binding IsUnknownRemoteToolsVisible}">
+              <StackPanel Spacing="12">
+                <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.generic_tools}" />
+                <WrapPanel Orientation="Horizontal" ItemWidth="180">
+                  <Button Classes="secondary-action" Command="{Binding OpenRemoteAppSwitcherCommand}" Content="{loc:Tr Key=tools.app_switcher}" TabIndex="800" automation:AutomationProperties.Name="{loc:Tr Key=tools.app_switcher}" />
+                  <Button Classes="secondary-action" Command="{Binding LockRemoteScreenCommand}" Content="{loc:Tr Key=tools.lock_screen}" TabIndex="810" automation:AutomationProperties.Name="{loc:Tr Key=tools.lock_screen}" />
+                </WrapPanel>
+              </StackPanel>
+            </Border>
+
+            <Border Classes="inner-panel" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1">
+              <StackPanel Spacing="10">
+                <TextBlock Classes="panel-title-small" Text="{loc:Tr Key=common.status}" />
+                <TextBlock Classes="muted" Focusable="True" IsTabStop="True" TabIndex="851" Text="{Binding StatusDetail}" TextWrapping="Wrap" automation:AutomationProperties.Name="{Binding StatusDetail}" />
+              </StackPanel>
+            </Border>
+          </Grid>
+
+          <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+            <Button Classes="primary-action" Command="{Binding GoToLaunchStepCommand}" Content="{loc:Tr Key=common.close}" TabIndex="860" automation:AutomationProperties.Name="{loc:Tr Key=common.close}" />
+          </Grid>
+        </StackPanel>
+      </Border>
+        </StackPanel>
+      </ScrollViewer>
+
+    </Grid>
+    <Grid Grid.Row="3" ColumnDefinitions="*,Auto" ColumnSpacing="16" Margin="0,18,0,0">
+      <Border Classes="activity-dock">
+        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+          <controls:WindowsLoadingIndicator IsVisible="{Binding IsFooterBusy}" VerticalAlignment="Center" />
+          <StackPanel Grid.Column="1" Spacing="2" VerticalAlignment="Center">
+            <TextBlock Classes="activity-dock-title" Focusable="True" IsTabStop="True" TabIndex="890" Text="{Binding FooterStatusTitle}" automation:AutomationProperties.Name="{Binding FooterStatusTitle}" />
+            <TextBlock Classes="activity-dock-body" Focusable="True" IsTabStop="True" TabIndex="891" Text="{Binding FooterStatusDetail}" TextWrapping="Wrap" automation:AutomationProperties.Name="{Binding FooterStatusDetail}" />
+          </StackPanel>
+        </Grid>
+      </Border>
+
+      <Button Classes="floating-settings" Command="{Binding GoToOptionsStepCommand}" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" IsVisible="{Binding IsLaunchAdvancedVisible}" TabIndex="900" automation:AutomationProperties.Name="{loc:Tr Key=common.open_settings}">
+        <Image Classes="floating-settings-icon" Source="avares://ShadowLink/Assets/icon.png" />
+      </Button>
+    </Grid>
+  </Grid>
+</Window>
